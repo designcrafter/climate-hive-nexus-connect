@@ -12,7 +12,7 @@ const events = [
     date: 'June 15-17, 2025',
     location: 'Brussels, Belgium',
     type: 'Conference',
-    description: 'Annual gathering of Europe's climate innovation leaders discussing breakthrough solutions and policy.'
+    description: "Annual gathering of Europe's climate innovation leaders discussing breakthrough solutions and policy."
   },
   {
     id: 2,
