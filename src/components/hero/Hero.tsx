@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -14,12 +15,12 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/join">
-              <Button size="lg" className="bg-primary text-secondary hover:bg-primary/90 font-medium">
+              <Button size="lg" className="rounded-full bg-primary text-secondary hover:bg-primary/90 font-medium">
                 Become a Member
               </Button>
             </Link>
             <Link to="/about">
-              <Button size="lg" variant="outline" className="border-white hover:bg-white text-lime-950">
+              <Button size="lg" variant="outline" className="rounded-full border-white hover:bg-white text-lime-950">
                 Learn More
               </Button>
             </Link>

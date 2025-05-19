@@ -38,6 +38,13 @@ const opportunities = [
 ];
 
 const FeaturedOpportunities = () => {
+  const categoryColors = {
+    'Funding': 'bg-accent-orange/20 text-accent-orange border-accent-orange',
+    'Partnership': 'bg-accent-blue/20 text-accent-blue border-accent-blue',
+    'Challenge': 'bg-accent-purple/20 text-accent-purple border-accent-purple',
+    'Collaboration': 'bg-accent-blue/20 text-accent-blue border-accent-blue'
+  };
+
   return (
     <div className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -53,7 +60,7 @@ const FeaturedOpportunities = () => {
             <Card key={opportunity.id} className="border border-gray-200 hover:border-primary transition-colors">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
-                  <Badge variant="outline" className="bg-primary/20 text-secondary border-primary hover:bg-primary/30">
+                  <Badge variant="outline" className={`${categoryColors[opportunity.category as keyof typeof categoryColors]} border rounded-full`}>
                     {opportunity.category}
                   </Badge>
                   {opportunity.amount && (
