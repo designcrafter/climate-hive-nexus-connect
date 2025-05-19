@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const Hero = () => {
-  return (
-    <div className="bg-secondary text-white py-16 md:py-24">
+  return <div className="bg-secondary text-white py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
@@ -22,15 +19,13 @@ const Hero = () => {
               </Button>
             </Link>
             <Link to="/about">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-secondary">
+              <Button size="lg" variant="outline" className="border-white hover:bg-white text-lime-950">
                 Learn More
               </Button>
             </Link>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Hero;
