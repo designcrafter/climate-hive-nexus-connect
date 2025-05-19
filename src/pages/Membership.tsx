@@ -1,70 +1,64 @@
 
 import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardFooter, CardTitle } from '@/components/ui/card';
+import { Check } from 'lucide-react';
 
 const Membership = () => {
-  const membershipTypes = [
+  const membershipTiers = [
     {
-      id: "individual",
-      title: "Individual",
-      price: "€99/year",
-      summary: "For professionals, researchers, and climate enthusiasts",
-      description: "Connect with Europe's climate innovation community as an individual member. Gain access to events, knowledge resources, and networking opportunities.",
+      id: 'individual',
+      name: 'Individual',
+      description: 'For professionals, researchers, and enthusiasts passionate about climate innovation.',
+      price: '€120',
+      period: 'per year',
       features: [
-        "Full access to community platform and member directory",
-        "Member rates for all Climate KIC events and programs",
-        "Access to all knowledge hub resources and guides",
-        "Participate in forum discussions and member groups",
-        "Create a searchable profile in the member directory",
-        "Apply for funding opportunities and partnerships",
-        "Monthly innovation briefings via email"
+        'Full access to member directory',
+        'Participate in community discussions',
+        'Access to knowledge hub resources',
+        'Discounted event tickets',
+        'Monthly newsletter',
+        'Free webinars and workshops'
       ],
-      highlight: "Free 30-day trial available",
-      ctaText: "Start Free Trial",
-      ctaLink: "/join/individual"
+      primaryAction: 'Start Free Trial',
+      secondaryAction: 'Learn More'
     },
     {
-      id: "organization",
-      title: "Organization",
-      price: "From €499/year",
-      summary: "For companies, NGOs, research institutions and startups",
-      description: "Establish your organization's presence in Europe's leading climate innovation community. Connect with potential partners, find talent, and showcase your work.",
+      id: 'organization',
+      name: 'Organization',
+      description: 'For companies, NGOs, research institutions and government bodies working on climate solutions.',
+      price: 'From €500',
+      period: 'per year',
       features: [
-        "All Individual member benefits",
-        "Multiple team member accounts (3-10 based on size)",
-        "Featured organization profile with logo and case studies",
-        "Ability to post opportunities and events to the community",
-        "Recruit talent and find partners through the platform",
-        "Priority access to funding calls and partnership programs",
-        "Showcase your climate projects and innovations",
-        "Co-host events and workshops with Climate KIC"
+        'All Individual benefits',
+        'Organization profile in directory',
+        'Post job openings and opportunities',
+        'Host events on the platform',
+        'Share resources in knowledge hub',
+        'Access to partner network'
       ],
-      highlight: "Custom pricing based on organization size and type",
-      ctaText: "Request Quote",
-      ctaLink: "/join/organization"
+      primaryAction: 'Request Invoice',
+      secondaryAction: 'Contact Sales',
+      highlighted: true
     },
     {
-      id: "farmer",
-      title: "Farmer",
-      price: "€49/year",
-      summary: "For agricultural professionals and farming organizations",
-      description: "A specialized membership for those working in agriculture who are implementing or interested in climate-smart farming practices.",
+      id: 'farmer',
+      name: 'Farmer',
+      description: 'For agricultural professionals implementing sustainable farming practices.',
+      price: '€80',
+      period: 'per year',
       features: [
-        "Access to agricultural innovation resources and case studies",
-        "Connection to specialized farming community and experts",
-        "Climate-smart agriculture guides and implementation tools",
-        "Connect with ag-tech innovators and solution providers",
-        "Specialized funding opportunities for sustainable farming",
-        "Discounted access to sustainable agriculture workshops",
-        "Showcase your climate-friendly agricultural practices"
+        'All Individual benefits',
+        'Access to agricultural resources',
+        'Specialized farmer discussion groups',
+        'Sustainable farming workshops',
+        'Connection with agricultural experts',
+        'Funding opportunities for farmers'
       ],
-      highlight: "3-month free trial for new members",
-      ctaText: "Start 3-Month Trial",
-      ctaLink: "/join/farmer"
+      primaryAction: 'Join as Farmer',
+      secondaryAction: 'Learn More'
     }
   ];
 
@@ -72,107 +66,101 @@ const Membership = () => {
     <>
       <Header />
       <main>
-        <div className="bg-gradient-to-br from-primary/20 to-white py-12">
+        <div className="bg-secondary text-white py-12">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold text-secondary mb-4">Join Our Climate Innovation Community</h1>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-8">
-              Select the membership type that's right for you and become part of Europe's largest climate innovation network.
+            <h1 className="text-4xl font-bold mb-4">Join Our Community</h1>
+            <p className="text-xl max-w-2xl mx-auto">
+              Be part of Europe's leading network of climate innovators and collaborate on projects that drive systemic change.
             </p>
           </div>
         </div>
-        
-        <div className="container mx-auto px-4 py-12">
-          <Tabs defaultValue="individual" className="w-full max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="individual">Individual</TabsTrigger>
-              <TabsTrigger value="organization">Organization</TabsTrigger>
-              <TabsTrigger value="farmer">Farmer</TabsTrigger>
-            </TabsList>
+
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-secondary mb-4">Membership Tiers</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Choose the membership option that works best for you or your organization and join our community of climate innovators.
+              </p>
+            </div>
             
-            {membershipTypes.map(membership => (
-              <TabsContent key={membership.id} value={membership.id} className="animate-fade-in">
-                <div className="bg-white rounded-lg border p-8">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-8">
-                    <div>
-                      <h2 className="text-2xl font-bold text-secondary mb-2">{membership.title} Membership</h2>
-                      <div className="text-3xl font-bold mb-2">{membership.price}</div>
-                      <p className="text-gray-600">{membership.summary}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {membershipTiers.map(tier => (
+                <Card 
+                  key={tier.id} 
+                  className={`border ${tier.highlighted ? 'border-primary shadow-lg' : 'border-gray-200'} h-full flex flex-col`}
+                >
+                  <CardHeader className={tier.highlighted ? 'bg-primary/10' : ''}>
+                    <CardTitle className="text-2xl font-bold text-secondary">{tier.name}</CardTitle>
+                    <p className="text-gray-600 mt-2">{tier.description}</p>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <div className="mb-6">
+                      <span className="text-3xl font-bold text-secondary">{tier.price}</span>
+                      <span className="text-gray-500 ml-1">{tier.period}</span>
                     </div>
-                    <div className="mt-4 md:mt-0">
-                      <Button 
-                        size="lg" 
-                        className="bg-primary text-secondary hover:bg-primary/90"
-                        onClick={() => window.location.href = membership.ctaLink}
-                      >
-                        {membership.ctaText}
-                      </Button>
-                      <p className="text-sm text-accent-blue mt-2">{membership.highlight}</p>
-                    </div>
-                  </div>
-                  
-                  <p className="text-gray-700 mb-6">{membership.description}</p>
-                  
-                  <h3 className="text-xl font-semibold mb-4">Membership Benefits</h3>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mb-8">
-                    {membership.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle size={18} className="text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <div className="border-t pt-6 mt-6">
-                    <h3 className="text-lg font-semibold mb-3">How to Join</h3>
-                    <ol className="list-decimal pl-5 space-y-2 mb-6">
-                      <li>Complete the online application form</li>
-                      <li>Receive approval confirmation via email</li>
-                      <li>Set up your profile and payment details</li>
-                      <li>Start connecting with the community</li>
-                    </ol>
+                    
+                    <ul className="space-y-3">
+                      {tier.features.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <Check size={18} className="text-primary shrink-0 mr-2 mt-0.5" />
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardFooter className="flex flex-col gap-2">
                     <Button 
-                      size="lg" 
-                      className="bg-primary text-secondary hover:bg-primary/90"
-                      onClick={() => window.location.href = membership.ctaLink}
+                      className={`w-full ${tier.highlighted ? 'bg-primary text-secondary hover:bg-primary/90' : 'bg-secondary text-white hover:bg-secondary/90'}`}
                     >
-                      {membership.ctaText}
+                      {tier.primaryAction}
                     </Button>
-                  </div>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
-        
-        <div className="bg-gray-50 py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold text-secondary text-center mb-8">Frequently Asked Questions</h2>
+                    <Button variant="outline" className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white">
+                      {tier.secondaryAction}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
             
-            <div className="max-w-3xl mx-auto space-y-6">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">How does the free trial work?</h3>
-                <p className="text-gray-600">Individual members get a 30-day free trial with full access to all platform features. You'll need to provide payment details, but won't be charged until after the trial period. You can cancel anytime during the trial.</p>
+            <div className="mt-16 p-8 bg-gray-50 rounded-lg">
+              <h3 className="text-2xl font-bold text-secondary mb-4">Membership Benefits</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-bold text-lg mb-2">Connect</h4>
+                  <p className="text-gray-700 mb-4">
+                    Build relationships with climate innovators across Europe, including researchers, entrepreneurs, 
+                    policymakers, investors, and industry leaders.
+                  </p>
+                  <h4 className="font-bold text-lg mb-2">Collaborate</h4>
+                  <p className="text-gray-700">
+                    Find project partners, form working groups, and participate in co-creation initiatives to develop 
+                    climate solutions with lasting impact.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-2">Learn</h4>
+                  <p className="text-gray-700 mb-4">
+                    Access exclusive resources, participate in skill-building workshops, and stay informed on the latest 
+                    climate innovation developments and best practices.
+                  </p>
+                  <h4 className="font-bold text-lg mb-2">Grow</h4>
+                  <p className="text-gray-700">
+                    Discover funding opportunities, gain visibility for your work, and accelerate the development and 
+                    scaling of your climate solutions.
+                  </p>
+                </div>
               </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Can I upgrade my membership later?</h3>
-                <p className="text-gray-600">Yes, you can upgrade from Individual to Organization membership at any time. The remaining value of your current membership will be credited toward your new membership level.</p>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">How many team members can I add with an Organization membership?</h3>
-                <p className="text-gray-600">Organization memberships include between 3-10 member accounts depending on your organization's size and membership tier. Additional accounts can be added for an extra fee.</p>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">What payment methods do you accept?</h3>
-                <p className="text-gray-600">We accept all major credit cards and bank transfers for annual payments. Organizations can also request invoice-based payment.</p>
-              </div>
-              
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Do you offer discounts for students or early-stage startups?</h3>
-                <p className="text-gray-600">Yes, we have special rates for students, academic institutions, and early-stage startups. Contact our membership team for details.</p>
-              </div>
+            </div>
+            
+            <div className="mt-16 text-center">
+              <h3 className="text-2xl font-bold text-secondary mb-4">Ready to get started?</h3>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Join our community today and be part of Europe's leading climate innovation network.
+              </p>
+              <Button size="lg" className="bg-primary text-secondary hover:bg-primary/90">
+                Become a Member
+              </Button>
             </div>
           </div>
         </div>

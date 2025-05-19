@@ -6,7 +6,7 @@ import { Search } from 'lucide-react';
 
 const Header = () => {
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-secondary text-white border-b border-secondary-foreground/10 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <Link to="/" className="mr-8">
@@ -17,29 +17,29 @@ const Header = () => {
             />
           </Link>
           <nav className="hidden md:flex space-x-6">
-            <Link to="/events" className="text-secondary hover:text-primary transition-colors font-medium">
+            <Link to="/events" className="text-white hover:text-primary transition-colors font-medium">
               Events
             </Link>
-            <Link to="/opportunities" className="text-secondary hover:text-primary transition-colors font-medium">
+            <Link to="/opportunities" className="text-white hover:text-primary transition-colors font-medium">
               Opportunities
             </Link>
-            <Link to="/knowledge" className="text-secondary hover:text-primary transition-colors font-medium">
+            <Link to="/knowledge" className="text-white hover:text-primary transition-colors font-medium">
               Knowledge Hub
             </Link>
-            <Link to="/directory" className="text-secondary hover:text-primary transition-colors font-medium">
+            <Link to="/directory" className="text-white hover:text-primary transition-colors font-medium">
               Directory
             </Link>
-            <Link to="/forum" className="text-secondary hover:text-primary transition-colors font-medium">
+            <Link to="/forum" className="text-white hover:text-primary transition-colors font-medium">
               Forum
             </Link>
           </nav>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="text-secondary p-2 rounded-full hover:bg-gray-100">
+          <button className="text-white p-2 rounded-full hover:bg-secondary-foreground/10">
             <Search size={20} />
           </button>
           <Link to="/login">
-            <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white">
+            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-secondary">
               Log in
             </Button>
           </Link>

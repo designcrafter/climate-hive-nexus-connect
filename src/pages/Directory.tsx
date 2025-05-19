@@ -1,455 +1,221 @@
 
-import React, { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Filter, MapPin, User, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
-// Mock directory data
-const directoryData = [
-  {
-    id: 1,
-    name: "Green Energy Solutions",
-    type: "Organization",
-    orgType: "Company",
-    location: "Amsterdam, Netherlands",
-    field: "Renewable Energy",
-    skills: ["Solar Energy", "Grid Integration", "Energy Storage"],
-    avatar: "GE",
-    description: "Leading renewable energy provider specializing in solar and wind integration technologies.",
-    verified: true,
-    featured: true
-  },
-  {
-    id: 2,
-    name: "Dr. Maria Schmidt",
-    type: "Individual",
-    role: "Researcher",
-    location: "Berlin, Germany",
-    field: "Urban Planning",
-    skills: ["Climate Adaptation", "Urban Resilience", "Policy"],
-    avatar: "MS",
-    description: "Climate resilience expert designing adaptation strategies for European cities.",
-    verified: true
-  },
-  {
-    id: 3,
-    name: "CircularTech",
-    type: "Organization",
-    orgType: "Startup",
-    location: "Barcelona, Spain",
-    field: "Circular Economy",
-    skills: ["Waste Reduction", "Recycling Technology", "Material Science"],
-    avatar: "CT",
-    description: "Developing technology solutions to measure and enhance circular resource flows.",
-    featured: true
-  },
-  {
-    id: 4,
-    name: "Klaus Bergmann",
-    type: "Farmer",
-    location: "Bavaria, Germany",
-    field: "Regenerative Agriculture",
-    skills: ["Carbon Sequestration", "Sustainable Farming", "Soil Health"],
-    avatar: "KB",
-    description: "Fourth-generation farmer implementing carbon sequestration through regenerative practices."
-  },
-  {
-    id: 5,
-    name: "CleanWave Technologies",
-    type: "Organization",
-    orgType: "Company",
-    location: "Copenhagen, Denmark",
-    field: "Water Management",
-    skills: ["Water Treatment", "Resource Recovery", "Smart Monitoring"],
-    avatar: "CW",
-    description: "Innovative solutions for water treatment and management in urban environments."
-  },
-  {
-    id: 6,
-    name: "Elena Rossi",
-    type: "Individual",
-    role: "Consultant",
-    location: "Milan, Italy",
-    field: "Sustainable Finance",
-    skills: ["ESG Investing", "Green Bonds", "Climate Risk Assessment"],
-    avatar: "ER",
-    description: "Financial expert helping organizations align portfolios with climate goals and ESG criteria."
-  },
-  {
-    id: 7,
-    name: "Sustainable Farms Co-op",
-    type: "Organization",
-    orgType: "Cooperative",
-    location: "Bordeaux, France",
-    field: "Agriculture",
-    skills: ["Organic Farming", "Local Food Systems", "Biodiversity"],
-    avatar: "SF",
-    description: "Farmer cooperative implementing climate-friendly agricultural practices across the region."
-  },
-  {
-    id: 8,
-    name: "Dr. Thomas Weber",
-    type: "Individual",
-    role: "Academic",
-    location: "Vienna, Austria",
-    field: "Carbon Capture",
-    skills: ["CCUS Technology", "CO2 Utilization", "Climate Policy"],
-    avatar: "TW",
-    description: "Professor researching next-generation carbon capture and utilization technologies."
-  }
-];
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Search, Filter, ArrowRight } from 'lucide-react';
 
 const Directory = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState({
-    type: {
-      individual: false,
-      organization: false,
-      farmer: false,
+  // Sample members data
+  const members = [
+    {
+      id: 1,
+      name: 'Greentech Solutions',
+      type: 'Organization',
+      location: 'Amsterdam, Netherlands',
+      focus: 'Renewable Energy',
+      logo: 'https://via.placeholder.com/60'
     },
-    field: {
-      energy: false,
-      agriculture: false,
-      water: false,
-      circular: false,
-      finance: false,
-      urban: false,
-      policy: false,
-      transport: false,
+    {
+      id: 2,
+      name: 'Dr. Maria Schmidt',
+      type: 'Individual',
+      location: 'Berlin, Germany',
+      focus: 'Climate Policy',
+      avatar: 'https://via.placeholder.com/60'
     },
-    location: {
-      northern: false,
-      western: false,
-      eastern: false,
-      southern: false,
-    }
-  });
-
-  // Filter members based on search term and filters
-  const filteredMembers = directoryData.filter(member => {
-    // Search term filtering
-    if (searchTerm && 
-        !member.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
-        !member.description.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        !member.field.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return false;
-    }
-    
-    // Type filtering
-    const typeFiltersSelected = 
-      selectedFilters.type.individual || 
-      selectedFilters.type.organization || 
-      selectedFilters.type.farmer;
-    
-    if (typeFiltersSelected) {
-      if (
-        (member.type === "Individual" && !selectedFilters.type.individual) ||
-        (member.type === "Organization" && !selectedFilters.type.organization) ||
-        (member.type === "Farmer" && !selectedFilters.type.farmer)
-      ) {
-        return false;
-      }
-    }
-    
-    // For simplicity, we're not implementing the full field and location filtering logic
-    // In a real app, we would check each selected filter against the member properties
-    
-    return true;
-  });
+    {
+      id: 3,
+      name: 'EcoFarm Cooperative',
+      type: 'Organization',
+      location: 'Barcelona, Spain',
+      focus: 'Sustainable Agriculture',
+      logo: 'https://via.placeholder.com/60'
+    },
+    {
+      id: 4,
+      name: 'Nordic Clean Tech',
+      type: 'Organization',
+      location: 'Stockholm, Sweden',
+      focus: 'Water Technologies',
+      logo: 'https://via.placeholder.com/60'
+    },
+    {
+      id: 5,
+      name: 'Dr. Thomas Weber',
+      type: 'Individual',
+      location: 'Vienna, Austria',
+      focus: 'Urban Planning',
+      avatar: 'https://via.placeholder.com/60'
+    },
+    {
+      id: 6,
+      name: 'Circular Materials Institute',
+      type: 'Organization',
+      location: 'Copenhagen, Denmark',
+      focus: 'Waste Reduction',
+      logo: 'https://via.placeholder.com/60'
+    },
+    {
+      id: 7,
+      name: 'Sofia Kovacs',
+      type: 'Individual',
+      location: 'Budapest, Hungary',
+      focus: 'Biodiversity',
+      avatar: 'https://via.placeholder.com/60'
+    },
+    {
+      id: 8,
+      name: 'Alpine Climate Foundation',
+      type: 'Organization',
+      location: 'Zürich, Switzerland',
+      focus: 'Climate Finance',
+      logo: 'https://via.placeholder.com/60'
+    },
+  ];
 
   return (
     <>
       <Header />
       <main>
-        <div className="bg-gradient-to-br from-primary/20 to-white py-12">
+        <div className="bg-secondary text-white py-12">
           <div className="container mx-auto px-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Member Directory</h1>
-            <p className="text-lg text-gray-700 max-w-2xl mb-8">
-              Connect with climate innovators, experts, and organizations across Europe.
+            <h1 className="text-4xl font-bold mb-4">Member Directory</h1>
+            <p className="text-xl max-w-2xl">
+              Connect with individuals and organizations in our community who are driving climate innovation across Europe.
             </p>
-            
-            <div className="relative max-w-2xl">
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-between items-center mb-8">
+            <div className="relative w-full max-w-xl">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              <Input 
-                type="search" 
-                placeholder="Search by name, expertise, or keyword..." 
-                className="pl-10 py-6"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+              <input 
+                type="text" 
+                placeholder="Search members by name, expertise or location..." 
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
           </div>
-        </div>
-        
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Filters sidebar */}
-            <div className="md:w-1/4">
-              <div className="bg-white rounded-lg border p-4 sticky top-24">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-semibold text-lg flex items-center">
-                    <Filter size={18} className="mr-2" />
-                    Filters
-                  </h2>
-                  <Button variant="ghost" size="sm" className="text-sm">Reset</Button>
-                </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+            <div className="w-full md:w-1/4">
+              <div className="bg-gray-50 p-6 rounded-lg sticky top-24">
+                <h2 className="text-xl font-bold text-secondary mb-4">Filter Members</h2>
                 
-                <div className="mb-6">
-                  <h3 className="font-medium text-sm text-gray-500 mb-2">Member Type</h3>
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">Member Type</h3>
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="type-individual" 
-                        checked={selectedFilters.type.individual}
-                        onCheckedChange={(checked) => 
-                          setSelectedFilters({
-                            ...selectedFilters, 
-                            type: {...selectedFilters.type, individual: !!checked}
-                          })
-                        }
-                      />
-                      <label htmlFor="type-individual" className="text-sm">
-                        Individual Members
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="org" className="mr-2"/>
+                      <label htmlFor="org">Organizations</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="type-org" 
-                        checked={selectedFilters.type.organization}
-                        onCheckedChange={(checked) => 
-                          setSelectedFilters({
-                            ...selectedFilters, 
-                            type: {...selectedFilters.type, organization: !!checked}
-                          })
-                        }
-                      />
-                      <label htmlFor="type-org" className="text-sm">
-                        Organizations
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="indiv" className="mr-2"/>
+                      <label htmlFor="indiv">Individuals</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="type-farmer" 
-                        checked={selectedFilters.type.farmer}
-                        onCheckedChange={(checked) => 
-                          setSelectedFilters({
-                            ...selectedFilters, 
-                            type: {...selectedFilters.type, farmer: !!checked}
-                          })
-                        }
-                      />
-                      <label htmlFor="type-farmer" className="text-sm">
-                        Farmers
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="farmers" className="mr-2"/>
+                      <label htmlFor="farmers">Farmers</label>
                     </div>
                   </div>
                 </div>
                 
-                <div className="mb-6">
-                  <h3 className="font-medium text-sm text-gray-500 mb-2">Field of Work</h3>
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">Focus Areas</h3>
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="field-energy" />
-                      <label htmlFor="field-energy" className="text-sm">
-                        Energy
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="energy" className="mr-2"/>
+                      <label htmlFor="energy">Renewable Energy</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="field-agriculture" />
-                      <label htmlFor="field-agriculture" className="text-sm">
-                        Agriculture
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="agriculture" className="mr-2"/>
+                      <label htmlFor="agriculture">Sustainable Agriculture</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="field-circular" />
-                      <label htmlFor="field-circular" className="text-sm">
-                        Circular Economy
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="policy" className="mr-2"/>
+                      <label htmlFor="policy">Climate Policy</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="field-urban" />
-                      <label htmlFor="field-urban" className="text-sm">
-                        Urban Planning
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="circular" className="mr-2"/>
+                      <label htmlFor="circular">Circular Economy</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="field-finance" />
-                      <label htmlFor="field-finance" className="text-sm">
-                        Finance & Investment
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="water" className="mr-2"/>
+                      <label htmlFor="water">Water Technologies</label>
                     </div>
                   </div>
-                  <Button variant="link" size="sm" className="text-xs text-accent-blue mt-1 p-0">
-                    + Show more fields
-                  </Button>
                 </div>
                 
-                <div className="mb-2">
-                  <h3 className="font-medium text-sm text-gray-500 mb-2">Location</h3>
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">Region</h3>
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="location-north" />
-                      <label htmlFor="location-north" className="text-sm">
-                        Northern Europe
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="north" className="mr-2"/>
+                      <label htmlFor="north">Northern Europe</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="location-west" />
-                      <label htmlFor="location-west" className="text-sm">
-                        Western Europe
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="south" className="mr-2"/>
+                      <label htmlFor="south">Southern Europe</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="location-east" />
-                      <label htmlFor="location-east" className="text-sm">
-                        Eastern Europe
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="east" className="mr-2"/>
+                      <label htmlFor="east">Eastern Europe</label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="location-south" />
-                      <label htmlFor="location-south" className="text-sm">
-                        Southern Europe
-                      </label>
+                    <div className="flex items-center">
+                      <input type="checkbox" id="west" className="mr-2"/>
+                      <label htmlFor="west">Western Europe</label>
                     </div>
                   </div>
                 </div>
+                
+                <Button className="w-full bg-primary text-secondary hover:bg-primary/90">
+                  <Filter size={16} className="mr-1" /> Apply Filters
+                </Button>
               </div>
             </div>
             
-            {/* Directory results */}
-            <div className="md:w-3/4">
-              <div className="mb-6">
-                <Tabs defaultValue="grid">
-                  <div className="flex justify-between items-center">
-                    <div className="text-gray-600">
-                      {filteredMembers.length} Members Found
-                    </div>
-                    <TabsList>
-                      <TabsTrigger value="grid">Grid</TabsTrigger>
-                      <TabsTrigger value="list">List</TabsTrigger>
-                    </TabsList>
-                  </div>
-                  
-                  <TabsContent value="grid">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                      {filteredMembers.map(member => (
-                        <Card key={member.id} className={`border hover:border-primary transition-colors ${member.featured ? 'ring-1 ring-primary' : ''}`}>
-                          <CardContent className="p-4">
-                            <div className="flex items-start mb-3">
-                              <Avatar className="h-12 w-12">
-                                <AvatarImage src="" alt={member.name} />
-                                <AvatarFallback className={member.type === 'Organization' ? "bg-secondary text-white" : "bg-primary text-secondary"}>
-                                  {member.avatar}
-                                </AvatarFallback>
-                              </Avatar>
-                              <div className="ml-3">
-                                <h3 className="font-medium text-secondary">
-                                  {member.name}
-                                  {member.verified && (
-                                    <span className="inline-block w-4 h-4 bg-green-500 rounded-full ml-1 text-white text-xs flex items-center justify-center" title="Verified Member">✓</span>
-                                  )}
-                                </h3>
-                                <div className="text-sm text-gray-500">
-                                  <span className="inline-block bg-gray-100 rounded-full px-2 py-0.5 mr-1 text-xs">
-                                    {member.type}
-                                  </span>
-                                  <span className="text-xs">{member.field}</span>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div className="text-xs text-gray-500 flex items-center mb-2">
-                              <MapPin size={12} className="mr-1" />
+            <div className="w-full md:w-3/4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {members.map(member => (
+                  <Card key={member.id} className="border border-gray-200 hover:border-primary transition-all hover:shadow-md">
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                          <img src={member.logo || member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="ml-3">
+                          <h3 className="font-medium text-lg">{member.name}</h3>
+                          <div className="flex items-center">
+                            <span className="text-xs bg-primary/20 text-secondary px-2 py-0.5 rounded-full mr-2">
+                              {member.type}
+                            </span>
+                            <span className="text-xs text-gray-500">
                               {member.location}
-                            </div>
-                            
-                            <p className="text-sm text-gray-600 mb-3 line-clamp-2">{member.description}</p>
-                            
-                            <div className="mb-3">
-                              {member.skills && member.skills.slice(0, 2).map((skill, i) => (
-                                <span key={i} className="inline-block bg-gray-100 text-gray-800 text-xs rounded-full px-2 py-0.5 mr-1 mb-1">
-                                  {skill}
-                                </span>
-                              ))}
-                              {member.skills && member.skills.length > 2 && (
-                                <span className="text-xs text-gray-500">+{member.skills.length - 2} more</span>
-                              )}
-                            </div>
-                            
-                            <Link 
-                              to={`/directory/${member.id}`} 
-                              className="text-xs text-accent-blue hover:underline block"
-                            >
-                              View Profile →
-                            </Link>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="list">
-                    <div className="space-y-3 mt-4">
-                      {filteredMembers.map(member => (
-                        <div key={member.id} className={`border rounded-lg p-4 hover:border-primary transition-colors ${member.featured ? 'ring-1 ring-primary' : ''}`}>
-                          <div className="flex items-start">
-                            <Avatar className="h-12 w-12">
-                              <AvatarImage src="" alt={member.name} />
-                              <AvatarFallback className={member.type === 'Organization' ? "bg-secondary text-white" : "bg-primary text-secondary"}>
-                                {member.avatar}
-                              </AvatarFallback>
-                            </Avatar>
-                            
-                            <div className="ml-4 flex-1">
-                              <div className="flex justify-between">
-                                <h3 className="font-medium text-secondary">
-                                  {member.name}
-                                  {member.verified && (
-                                    <span className="inline-block w-4 h-4 bg-green-500 rounded-full ml-1 text-white text-xs flex items-center justify-center" title="Verified Member">✓</span>
-                                  )}
-                                </h3>
-                                <div className="text-xs text-gray-500 flex items-center">
-                                  <MapPin size={12} className="mr-1" />
-                                  {member.location}
-                                </div>
-                              </div>
-                              
-                              <div className="text-sm text-gray-500 mb-2">
-                                <span className="inline-block bg-gray-100 rounded-full px-2 py-0.5 mr-1 text-xs">
-                                  {member.type}
-                                </span>
-                                <span className="text-xs">{member.field}</span>
-                              </div>
-                              
-                              <p className="text-sm text-gray-600 mb-3">{member.description}</p>
-                              
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  {member.skills && member.skills.map((skill, i) => (
-                                    <span key={i} className="inline-block bg-gray-100 text-gray-800 text-xs rounded-full px-2 py-0.5 mr-1 mb-1">
-                                      {skill}
-                                    </span>
-                                  ))}
-                                </div>
-                                
-                                <Link 
-                                  to={`/directory/${member.id}`} 
-                                  className="text-sm text-accent-blue hover:underline block"
-                                >
-                                  View Profile →
-                                </Link>
-                              </div>
-                            </div>
+                            </span>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </TabsContent>
-                </Tabs>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="mb-2">
+                        <span className="text-sm font-medium">Focus: </span>
+                        <span className="text-sm">{member.focus}</span>
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-2 border-secondary text-secondary hover:bg-secondary hover:text-white">
+                        View Profile <ArrowRight size={16} className="ml-1" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              
+              <div className="mt-8 flex justify-center">
+                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white">
+                  Load More Members
+                </Button>
               </div>
             </div>
           </div>
