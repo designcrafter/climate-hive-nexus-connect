@@ -5,9 +5,10 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Search, Filter, ArrowRight } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Directory = () => {
-  // Sample members data
+  // Sample members data with updated images
   const members = [
     {
       id: 1,
@@ -15,7 +16,9 @@ const Directory = () => {
       type: 'Organization',
       location: 'Amsterdam, Netherlands',
       focus: 'Renewable Energy',
-      logo: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=500&q=80',
+      color: 'bg-emerald-100',
+      initial: 'GS'
     },
     {
       id: 2,
@@ -23,7 +26,9 @@ const Directory = () => {
       type: 'Individual',
       location: 'Berlin, Germany',
       focus: 'Climate Policy',
-      avatar: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80',
+      color: 'bg-blue-100',
+      initial: 'MS'
     },
     {
       id: 3,
@@ -31,7 +36,9 @@ const Directory = () => {
       type: 'Organization',
       location: 'Barcelona, Spain',
       focus: 'Sustainable Agriculture',
-      logo: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80',
+      color: 'bg-green-100',
+      initial: 'EC'
     },
     {
       id: 4,
@@ -39,7 +46,9 @@ const Directory = () => {
       type: 'Organization',
       location: 'Stockholm, Sweden',
       focus: 'Water Technologies',
-      logo: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80',
+      color: 'bg-sky-100',
+      initial: 'NC'
     },
     {
       id: 5,
@@ -47,7 +56,9 @@ const Directory = () => {
       type: 'Individual',
       location: 'Vienna, Austria',
       focus: 'Urban Planning',
-      avatar: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&q=80',
+      color: 'bg-indigo-100',
+      initial: 'TW'
     },
     {
       id: 6,
@@ -55,7 +66,9 @@ const Directory = () => {
       type: 'Organization',
       location: 'Copenhagen, Denmark',
       focus: 'Waste Reduction',
-      logo: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80',
+      color: 'bg-amber-100',
+      initial: 'CM'
     },
     {
       id: 7,
@@ -63,7 +76,9 @@ const Directory = () => {
       type: 'Individual',
       location: 'Budapest, Hungary',
       focus: 'Biodiversity',
-      avatar: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&q=80',
+      color: 'bg-rose-100',
+      initial: 'SK'
     },
     {
       id: 8,
@@ -71,7 +86,9 @@ const Directory = () => {
       type: 'Organization',
       location: 'Zürich, Switzerland',
       focus: 'Climate Finance',
-      logo: 'https://via.placeholder.com/60'
+      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=500&q=80',
+      color: 'bg-teal-100',
+      initial: 'AC'
     },
   ];
 
@@ -183,9 +200,10 @@ const Directory = () => {
                   <Card key={member.id} className="border border-gray-200 hover:border-primary transition-all hover:shadow-md">
                     <CardHeader className="pb-2">
                       <div className="flex items-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                          <img src={member.logo || member.avatar} alt={member.name} className="w-full h-full object-cover" />
-                        </div>
+                        <Avatar className={`h-12 w-12 ${member.color}`}>
+                          <AvatarImage src={member.image} alt={member.name} />
+                          <AvatarFallback>{member.initial}</AvatarFallback>
+                        </Avatar>
                         <div className="ml-3">
                           <h3 className="font-medium text-lg">{member.name}</h3>
                           <div className="flex items-center">
